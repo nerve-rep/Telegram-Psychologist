@@ -1,7 +1,7 @@
 # Telegram Bot Psychologist with RAG
 
 ## Project Overview
-- **Project name:** PsychoBot
+- **Project name:** InReflectBot
 - **Type:** Telegram Bot with AI (RAG)
 - **Core functionality:** AI-powered psychological consultation bot that uses RAG to access consultation history and maintains patient medical records
 - **Target users:** Patients seeking psychological support, psychologists managing patients
