@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  psychobot:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./chroma_db:/app/chroma_db
+    restart: unless-stopped
