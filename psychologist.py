@@ -1,9 +1,9 @@
 from openai import OpenAI
-from config import OPENAI_API_KEY
+from config import OPENAI_API_KEY, OPENAI_BASE_URL
 from rag import rag_system
 
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
 
 SYSTEM_PROMPT = """Ты - опытный психолог-психотерапевт с более чем 15-летним стажем работы. 

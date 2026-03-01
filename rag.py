@@ -2,13 +2,13 @@ import chromadb
 from chromadb.config import Settings
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
-from config import OPENAI_API_KEY
+from config import OPENAI_API_KEY, OPENAI_BASE_URL
 import uuid
 
 
 class RAGSystem:
     def __init__(self):
-        self.embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY)
+        self.embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
         self.client = chromadb.PersistentClient(path="./chroma_db")
         self.collection_name = "consultations"
         
