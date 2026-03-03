@@ -36,3 +36,11 @@ data/
 # OS
 .DS_Store
 Thumbs.db
+
+# bak
+bak
+test_config.py
+cleanup_debug.py
+clear_chroma.py
+debug_db.py
+debug_rag.py

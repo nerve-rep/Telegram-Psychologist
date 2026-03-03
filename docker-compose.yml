@@ -5,6 +5,8 @@ services:
     build: .
     env_file:
       - .env
+    environment:
+      - DATABASE_URL=sqlite:////app/data/psychobot.db
     volumes:
       - ./data:/app/data
       - ./chroma_db:/app/chroma_db

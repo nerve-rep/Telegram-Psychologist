@@ -1,5 +1,5 @@
 from openai import OpenAI
-from config import OPENAI_API_KEY, OPENAI_BASE_URL
+from config import OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL
 from rag import rag_system
 
 
@@ -46,13 +46,17 @@ def generate_response(patient_id: int, user_message: str, patient_name: str = No
     
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=OPENAI_MODEL,
             messages=messages,
-            max_tokens=500,
+            max_tokens=1000,
             temperature=0.7
         )
         
         ai_response = response.choices[0].message.content
+        
+        # Обрезаем если слишком длинно для Telegram
+        if len(ai_response) > 4000:
+            ai_response = ai_response[:4000] + "..."
         
         # Сохраняем в RAG
         rag_system.add_consultation(patient_id, user_message, ai_response)

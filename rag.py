@@ -1,16 +1,17 @@
+#%%
 import chromadb
 from chromadb.config import Settings
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
-from config import OPENAI_API_KEY, OPENAI_BASE_URL
+from config import OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_EMBEDDING_MODEL
 import uuid
 
 
 class RAGSystem:
     def __init__(self):
-        self.embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
+        self.embeddings = OpenAIEmbeddings(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL, model=OPENAI_EMBEDDING_MODEL)
         self.client = chromadb.PersistentClient(path="./chroma_db")
-        self.collection_name = "consultations"
+        self.collection_name = "consultations_v2"
         
         try:
             self.collection = self.client.get_collection(name=self.collection_name)
@@ -27,7 +28,7 @@ class RAGSystem:
             documents=[combined_text],
             ids=[doc_id],
             metadatas=[{
-                "patient_id": patient_id,
+                "patient_id": str(patient_id),  # ChromaDB хранит metadata как строки
                 "user_message": user_message,
                 "ai_response": ai_response
             }]
@@ -40,7 +41,7 @@ class RAGSystem:
         results = self.collection.query(
             query_texts=[query],
             n_results=n_results,
-            where={"patient_id": patient_id}
+            where={"patient_id": str(patient_id)}  # Используем строку для фильтра
         )
         
         relevant_docs = []
