@@ -200,7 +200,13 @@ async def handle_consultation(update: Update, context: ContextTypes.DEFAULT_TYPE
         await update.message.reply_text(ai_response)
         
     except Exception as e:
-        await update.message.reply_text(f"Произошла ошибка: {str(e)}")
+        import traceback
+        # Печатаем полную ошибку в консоль сервера
+        print(f"❌ КРИТИЧЕСКАЯ ОШИБКА В handle_consultation:")
+        traceback.print_exc()
+        
+        # Пользователю отправляем вежливое общее сообщение
+        await update.message.reply_text("Извините, произошла техническая ошибка. Пожалуйста, попробуйте позже.")
     finally:
         db.close()
     
