@@ -47,7 +47,7 @@ class RAGSystem:
         relevant_docs = []
         if results and results.get('documents'):
             for i, doc in enumerate(results['documents'][0]):
-                if results['metadatas'] and len(results['metadatas']) > i:
+                if results['metadatas'] and len(results['metadatas'][0]) > i:
                     meta = results['metadatas'][0][i]
                     relevant_docs.append({
                         'text': doc,

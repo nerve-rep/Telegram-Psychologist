@@ -1,0 +1,22 @@
+.git
+.gitignore
+__pycache__/
+venv/
+.env
+.env.example
+
+# Базы данных (должны быть в volumes, а не в образе)
+*.db
+chroma_db/
+data/
+
+# Резервные копии и лишние файлы
+bak/
+*.log
+SPEC.md
+README.md
+cleanup_debug.py
+clear_chroma.py
+debug_db.py
+debug_rag.py
+test_config.py
